@@ -13,14 +13,14 @@
     <ion-row>
       
       <ion-col class="ion-text-center">
-        <ion-input type="text" placeholder="nombre de usuario"></ion-input>
+        <ion-input type="text" placeholder="nombre de usuario"  [(ngModel)]="nombre" errorText="el campo de nombre no debe estar vacio"></ion-input>
       </ion-col>
     </ion-row>
     
     
     <ion-row>
       <ion-col class="ion-text-center">
-        <ion-button href="sesion" color="warning">Recuperar</ion-button>
+        <ion-button (click)="recuperar()" color="warning">Recuperar</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
