@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { ServicioDatosService } from '../servicio-datos.service';
 
 
 @Component({
@@ -18,9 +19,12 @@ dato: boolean = false;
 
   constructor(private alertContorller:AlertController,
     private toastController: ToastController,
-    private router: Router) { 
+    private router: Router,
+    private servicioDatos: ServicioDatosService) { 
 
     }
+
+    
 
   ngOnInit() {
   }
@@ -55,10 +59,13 @@ dato: boolean = false;
       await toast.present();
     }
 ///-----------------------------------------------------------------
-    else if (numeroLetrasNombre >= 4 && numeroLetrasClave > 8) {
+    else if (numeroLetrasNombre >= 4 && numeroLetrasClave >= 8) {
       this.dato = true;
       if(this.dato){
         this.router.navigate(['inicio']);
+        this.servicioDatos.nombreUsuario = this.nombre;
+        this.nombre = '';
+        this.clave = '';
       }
     }
     else{

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { ServicioDatosService } from '../servicio-datos.service';
 
 @Component({
   selector: 'app-inicio',
@@ -10,7 +11,12 @@ import { Router } from '@angular/router';
 export class InicioPage implements OnInit {
 
   constructor( private alertContorller:AlertController,
-    private router: Router) { }
+    private router: Router,
+    private servicioDatos: ServicioDatosService) { }
+
+    getUsuario() {
+      return this.servicioDatos.nombreUsuario;
+    }
 
   ngOnInit() {
   }
