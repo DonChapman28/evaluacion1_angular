@@ -11,19 +11,20 @@
   <ion-grid fixed>
     <ion-row>
       <ion-col class="ion-text-center">
-        <input type="text">
+        <ion-input type="text" placeholder="nombre de usuario"  [(ngModel)]="nombre" errorText="el campo de nombre no debe estar vacio"></ion-input>
+        
       </ion-col>
     </ion-row>
     
     <ion-row>
       <ion-col class="ion-text-center">
-        <input type="password">
+        <ion-input type="password" placeholder="contraseña" [(ngModel)]="clave" errorText="el campo de contraseña no debe estar vacio"></ion-input>
       </ion-col>
     </ion-row>
     
     <ion-row>
       <ion-col class="ion-text-center">
-        <ion-button href="inicio">Ingresar</ion-button>
+        <ion-button (click)="validar()">Ingresar</ion-button>
       </ion-col>
     </ion-row>
     
