@@ -16,6 +16,7 @@ nombre = '';
 clave = '';  
 dato: boolean = false;
 profesorEncontrado: any = [];
+alumnoEncontrado: any = [];
 
 
 
@@ -79,7 +80,7 @@ profesorEncontrado: any = [];
               if (this.profesorEncontrado)this.router.navigate(['inicio']);
               else{
                 const toast = await this.toastController.create({
-                  message: 'Usuario no válido. Verifica tus credenciales.',
+                  message: 'Usuario no válido.',
                   buttons: ['OK'],
                   color: 'danger',
                   position: 'bottom',
@@ -97,10 +98,34 @@ profesorEncontrado: any = [];
           }
           // Redirigir a la página de inicio de profesores
           else if (this.nombre.endsWith('@alumno.cl')) {
-          // Redirigir a la página de inicio de alumnos
-          this.router.navigate(['inicio-alumnos']);
-          this.servicioDatos.nombreUsuario = this.nombre;
-        } else {
+            this.apiDatos.getAlumno().subscribe(async(data: any  = [])=> 
+            {console.log('Respuesta del servicio getAlumno:', data); 
+            console.log('Nombre de usuario:', this.nombre);
+            console.log('Contraseña:', this.clave);
+            this.alumnoEncontrado = data.find((alumnos: any = []) => 
+            alumnos.username === this.nombre && alumnos.pass === this.clave);
+            console.log(this.alumnoEncontrado);
+              
+  
+                if (this.alumnoEncontrado)this.router.navigate(['inicio-alumnos']);
+                else{
+                  const toast = await this.toastController.create({
+                    message: 'Usuario no válido.',
+                    buttons: ['OK'],
+                    color: 'danger',
+                    position: 'bottom',
+                    duration: 500,
+                  });
+                  await toast.present();
+  
+                }
+  
+                this.servicioDatos.nombreUsuario = this.nombre;
+                this.nombre = '';
+                this.clave = '';
+                
+              });
+            } else {
           // Dominio de correo no válido
           const toast = await this.toastController.create({
             message: 'Usuario inválido: dominio de correo incorrecto',
