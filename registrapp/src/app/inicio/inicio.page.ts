@@ -27,8 +27,6 @@ export class InicioPage implements OnInit {
     });
   }
 
-
-
 async cerrarSesion()
 {
   const alert = await this.alertContorller.create({

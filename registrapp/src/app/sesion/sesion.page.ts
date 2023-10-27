@@ -60,22 +60,43 @@ profesorEncontrado: any = [];
       });
       await toast.present();
     }
-///-----------------------------------------------------------------
+///--------------------validar cantidad de digitos y el termino del email---------------------------------------------
     else if (numeroLetrasNombre >= 4 && numeroLetrasClave >= 8) {
       this.dato = true;
+      
       if(this.dato){
         
         if (this.nombre.endsWith('@profe.cl')) {
-        // Redirigir a la página de inicio de profesores
-        this.router.navigate(['inicio']);
-        this.servicioDatos.nombreUsuario = this.nombre;
+          this.apiDatos.getProfesor().subscribe(async(data: any  = [])=> 
+          {console.log('Respuesta del servicio getProfesor:', data); 
+          console.log('Nombre de usuario:', this.nombre);
+          console.log('Contraseña:', this.clave);
+          this.profesorEncontrado = data.find((profesores: any = []) => 
+          profesores.username === this.nombre && profesores.pass === this.clave);
+          console.log(this.profesorEncontrado);
+            
+
+              if (this.profesorEncontrado)this.router.navigate(['inicio']);
+              else{
+                const toast = await this.toastController.create({
+                  message: 'Usuario no válido. Verifica tus credenciales.',
+                  buttons: ['OK'],
+                  color: 'danger',
+                  position: 'bottom',
+                  duration: 500,
+                });
+                await toast.present();
+
+              }
+
+              this.servicioDatos.nombreUsuario = this.nombre;
+              this.nombre = '';
+              this.clave = '';
+              
+            });
           }
           // Redirigir a la página de inicio de profesores
-          
-         
-        
-        
-        else if (this.nombre.endsWith('@alumno.cl')) {
+          else if (this.nombre.endsWith('@alumno.cl')) {
           // Redirigir a la página de inicio de alumnos
           this.router.navigate(['inicio-alumnos']);
           this.servicioDatos.nombreUsuario = this.nombre;
@@ -92,10 +113,10 @@ profesorEncontrado: any = [];
         }
     
         this.servicioDatos.nombreUsuario = this.nombre;
-        this.nombre = '';
-        this.clave = '';
+       /*  this.nombre = '';
+        this.clave = ''; */
       }
-    }
+     }
     //----------minimo de caracteres
     else{
       if (numeroLetrasClave > 1 && numeroLetrasClave < 8) {
