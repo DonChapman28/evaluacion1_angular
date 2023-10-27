@@ -64,20 +64,15 @@ profesorEncontrado: any = [];
     else if (numeroLetrasNombre >= 4 && numeroLetrasClave >= 8) {
       this.dato = true;
       if(this.dato){
+        
         if (this.nombre.endsWith('@profe.cl')) {
-          this.apiDatos.getProfesor().subscribe((data: any  = [])=> { 
-            this.profesorEncontrado = data.find((profesores: any = []) => profesores.username === this.nombre && profesores.pass === this.clave );
-            
-
-          })
-
-          
-          //validar con el json
-          if(this.profesorEncontrado){this.router.navigate(['inicio']);
-          this.servicioDatos.nombreUsuario = this.nombre;}
+        // Redirigir a la página de inicio de profesores
+        this.router.navigate(['inicio']);
+        this.servicioDatos.nombreUsuario = this.nombre;
+          }
           // Redirigir a la página de inicio de profesores
           
-        } 
+         
         
         
         else if (this.nombre.endsWith('@alumno.cl')) {
@@ -95,8 +90,7 @@ profesorEncontrado: any = [];
           });
           await toast.present();
         }
-        this.nombre = '';
-        this.clave = '';
+    
         this.servicioDatos.nombreUsuario = this.nombre;
         this.nombre = '';
         this.clave = '';
