@@ -3,6 +3,7 @@ import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ServicioDatosService } from '../servicio-datos.service';
 import { ApiDatosService } from '../apiDatos/api-datos.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -11,20 +12,29 @@ import { ApiDatosService } from '../apiDatos/api-datos.service';
   styleUrls: ['./inicio-alumnos.page.scss'],
 })
 export class InicioAlumnosPage implements OnInit {
+  horarios :any = [];
+  id : string = '';
   alumnos : any = [];
   constructor( private alertContorller:AlertController,
   private router: Router,
   private servicioDatos: ServicioDatosService,
-  private api:ApiDatosService) { }
+  private api:ApiDatosService,
+  private activated: ActivatedRoute) { }
 
   getUsuario() {
     return this.servicioDatos.nombreUsuario;
   }
 
   ngOnInit() {
-    this.api.getAlumno().subscribe(data => {
-      this.alumnos = data; // Asigna los datos a la propiedad profesores después de la respuesta
-      console.log(this.alumnos);
+    
+    this.activated.paramMap.subscribe(p => {
+      this.id = p.get('id') ?? '';
+      //con esta wea hacemos que horario tenga los datos que pedimos desde la api anasheeeeeeeiiiiii
+      this.api.getHorarioAlumno(this.id).subscribe((horarioData: any) => {
+        this.horarios = horarioData;
+        console.log('hola_xD');
+        console.log('Datos de horario:', this.horarios);
+      });
     });
   }
 

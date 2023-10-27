@@ -66,9 +66,9 @@ alumnoEncontrado: any = [];
       this.dato = true;
       
       if(this.dato){
-        
+        // nos manda a la pagina de profes
         if (this.nombre.endsWith('@profe.cl')) {
-          this.apiDatos.getProfesor().subscribe(async(data: any  = [])=> 
+          this.apiDatos.getProfesores().subscribe(async(data: any  = [])=> 
           {console.log('Respuesta del servicio getProfesor:', data); 
           console.log('Nombre de usuario:', this.nombre);
           console.log('Contraseña:', this.clave);
@@ -77,7 +77,7 @@ alumnoEncontrado: any = [];
           console.log(this.profesorEncontrado);
             
 
-              if (this.profesorEncontrado)this.router.navigate(['inicio']);
+              if (this.profesorEncontrado)this.router.navigate(['inicio/' + this.profesorEncontrado.profeId]);
               else{
                 const toast = await this.toastController.create({
                   message: 'Usuario no válido.',
@@ -90,25 +90,30 @@ alumnoEncontrado: any = [];
 
               }
 
-              this.servicioDatos.nombreUsuario = this.nombre;
+              this.servicioDatos.nombreUsuario = this.profesorEncontrado.nombre;
+              this.servicioDatos.Asignatura = this.profesorEncontrado.asignatura;
               this.nombre = '';
               this.clave = '';
               
             });
           }
-          // Redirigir a la página de inicio de profesores
+          // nos manda a la pagina de alumnos
           else if (this.nombre.endsWith('@alumno.cl')) {
-            this.apiDatos.getAlumno().subscribe(async(data: any  = [])=> 
-            {console.log('Respuesta del servicio getAlumno:', data); 
+            this.apiDatos.getAlumnos().subscribe(async(data: any  = [])=> 
+            {console.log('Respuesta del servicio getAlumno:', data,); 
             console.log('Nombre de usuario:', this.nombre);
             console.log('Contraseña:', this.clave);
             this.alumnoEncontrado = data.find((alumnos: any = []) => 
             alumnos.username === this.nombre && alumnos.pass === this.clave);
             console.log(this.alumnoEncontrado);
-              
-  
-                if (this.alumnoEncontrado)this.router.navigate(['inicio-alumnos']);
+            
+                if (this.alumnoEncontrado){
+                  const id = this.alumnoEncontrado.alumnoId;
+                  this.router.navigate(['inicio-alumnos/' + this.alumnoEncontrado.alumnoId]);
+                }
+               
                 else{
+                  
                   const toast = await this.toastController.create({
                     message: 'Usuario no válido.',
                     buttons: ['OK'],
@@ -120,13 +125,13 @@ alumnoEncontrado: any = [];
   
                 }
   
-                this.servicioDatos.nombreUsuario = this.nombre;
+                this.servicioDatos.nombreUsuario = this.alumnoEncontrado.nombre;
                 this.nombre = '';
                 this.clave = '';
                 
               });
             } else {
-          // Dominio de correo no válido
+          // correo malo
           const toast = await this.toastController.create({
             message: 'Usuario inválido: dominio de correo incorrecto',
             buttons: ['OK'],
@@ -166,11 +171,5 @@ alumnoEncontrado: any = [];
         await toast.present();
       }
     }
-
-    // Validación de dominio de correo
-  
-    
-  
   }  
-
 }

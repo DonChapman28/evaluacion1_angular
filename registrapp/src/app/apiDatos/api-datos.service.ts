@@ -11,23 +11,29 @@ export class ApiDatosService {
   listadoHorarios : any = [];
 
   constructor(private http: HttpClient) { }
-  getProfesor() {
-    const url = this.urlBaseAPI + '/profesores'; // Add a '/' before 'profesores'
+  getProfesores() {
+    const url = this.urlBaseAPI + '/profesores'; 
     return this.http.get(url);
   }
 
-  getAlumno() {
-    const url = this.urlBaseAPI + '/alumnos'; // Add a '/' before 'alumnos'
+  getAlumnos() {
+    const url = this.urlBaseAPI + '/alumnos'; 
     return this.http.get(url);
   }
+  
 
   getAsignaturas() {
-    const url = this.urlBaseAPI + '/asignaturas'; // Add a '/' before 'asignaturas'
+    const url = this.urlBaseAPI + '/asignaturas'; 
     return this.http.get(url);
   }
 
-  getHorarios() {
-    const url = this.urlBaseAPI + '/horario'; // Add a '/' before 'horario'
+  getHorarioAlumno(id: string) {
+    const url = this.urlBaseAPI + '/horario?alumnoId=' + id; 
+    return this.http.get(url);
+  }  
+  
+  getHorarioProfe(id: string) {
+    const url = this.urlBaseAPI + '/horario?profeId=' + id; 
     return this.http.get(url);
   }  
 }

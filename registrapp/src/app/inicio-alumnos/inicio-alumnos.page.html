@@ -7,16 +7,19 @@
 <ion-content [fullscreen]="true">
   <h1 class="ion-text-center">Bienvenido</h1>
   <h2 class="ion-text-center">{{ getUsuario() }}</h2> 
-</ion-content>
-
-<ion-content>
   <ion-list>
-    <ion-item *ngFor="let alumno of alumnos">
-      <ion-label>{{alumno.username}}</ion-label>
-      <ion-label>{{alumno.pass}}</ion-label>
-      <ion-label>{{alumno.nombre}}</ion-label>
+    <ion-item *ngFor="let horario of horarios">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{horario.nombreAsignatura}}</ion-card-title>
+          <ion-card-subtitle>Seccion: {{horario.seccion}}</ion-card-subtitle>
+          Profesor: {{horario.nombreProfe}}
+        </ion-card-header>
+      </ion-card>
     </ion-item>
   </ion-list>
+
+  <ion-button>Escanear QR</ion-button>
 </ion-content>
 
 <ion-footer>
