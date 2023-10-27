@@ -15,11 +15,13 @@ export class InicioPage implements OnInit {
   id : string = '';
   alumnos : any = [];
   profesores : any = [];
+  texto: any;
   constructor( private alertContorller:AlertController,
     private router: Router,
     private servicioDatos: ServicioDatosService,
     private api:ApiDatosService,
-    private activated: ActivatedRoute) { }
+    private activated: ActivatedRoute,
+  ) { }
 
     getUsuario() {
       return this.servicioDatos.nombreUsuario;
@@ -49,6 +51,12 @@ async cerrarSesion()
   });
   await alert.present();
   this.router.navigate(['sesion']);
+
+}
+
+async generarQr(){
+  this.router.navigate(['generar-qr']);
+ 
 
 }
 
