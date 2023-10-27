@@ -29,6 +29,5 @@ export class ApiDatosService {
   getHorarios() {
     const url = this.urlBaseAPI + '/horario'; // Add a '/' before 'horario'
     return this.http.get(url);
-  }
-  
+  }  
 }
