@@ -26,10 +26,16 @@ const routes: Routes = [
   {
     path: 'inicio-alumnos/:id',
     loadChildren: () => import('./inicio-alumnos/inicio-alumnos.module').then( m => m.InicioAlumnosPageModule)
-  },  {
-    path: 'generar-qr',
+  },
+  {
+    path: 'generar-qr/:qrId',
     loadChildren: () => import('./generar-qr/generar-qr.module').then( m => m.GenerarQrPageModule)
   },
+  {
+    path: 'leer-qr/:qrId',
+    loadChildren: () => import('./leer-qr/leer-qr.module').then( m => m.LeerQrPageModule)
+  },
+
 
 
 ];

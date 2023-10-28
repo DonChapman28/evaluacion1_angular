@@ -91,7 +91,7 @@ alumnoEncontrado: any = [];
               }
 
               this.servicioDatos.nombreUsuario = this.profesorEncontrado.nombre;
-              this.servicioDatos.Asignatura = this.profesorEncontrado.asignatura;
+              this.servicioDatos.asignatura = this.profesorEncontrado.asignatura;
               this.nombre = '';
               this.clave = '';
               

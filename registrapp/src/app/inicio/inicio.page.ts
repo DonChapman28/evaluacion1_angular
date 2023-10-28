@@ -13,7 +13,6 @@ import { ActivatedRoute } from '@angular/router';
 export class InicioPage implements OnInit {
   horarios :any = [];
   id : string = '';
-  alumnos : any = [];
   profesores : any = [];
   texto: any;
   constructor( private alertContorller:AlertController,
@@ -26,6 +25,8 @@ export class InicioPage implements OnInit {
     getUsuario() {
       return this.servicioDatos.nombreUsuario;
     }
+
+
 
   ngOnInit() {
     this.activated.paramMap.subscribe(p => {

@@ -7,20 +7,29 @@
 <ion-content [fullscreen]="true">
   <h1 class="ion-text-center">Bienvenido</h1>
   <h2 class="ion-text-center">{{ getUsuario() }}</h2> 
-  <ion-list>
-    <h1></h1>
-    <ion-item *ngFor="let horario of horarios">
-      <ion-card>
-        <ion-card-header>
-          
-          <ion-card-subtitle>Seccion: {{horario.seccion}}</ion-card-subtitle>
-            
-        </ion-card-header>
-      </ion-card>
-    </ion-item>
-  </ion-list>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-list class="ion-text-center">
+          <h1></h1>
+          <ion-item *ngFor="let horario of horarios" [routerLink]="['/generar-qr/'+ horario.seccion]">
+            <ion-card style="width: 100%; display: block;">
+              <ion-card-header>
+                
+                <ion-card-title>{{horario.nombreAsignatura}}</ion-card-title>
+                <ion-card-subtitle>Seccion: {{horario.seccion}}</ion-card-subtitle>
+                  
+              </ion-card-header>
+            </ion-card>
+          </ion-item>
+        </ion-list>
 
-  <ion-button (click)="generarQr()">Generar QR</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+ 
+
+  <!-- <ion-button (click)="generarQr()">Generar QR</ion-button> -->
   
 </ion-content>
 

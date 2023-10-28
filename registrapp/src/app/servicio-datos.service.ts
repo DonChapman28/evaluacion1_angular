@@ -5,7 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class ServicioDatosService {
   public nombreUsuario: string = '';
-  public Asignatura: string = '';
+  public asignatura: string = '';
+  public codigoQr: string = '';
 
   constructor() { }
 }
