@@ -1,0 +1,30 @@
+{
+	"profesores":[
+		{"id": 1,"profeId":1,"username":"patoyañez@profe.cl","pass":"pato1234","nombre": "Pato Yañez","asignatura": "Programacion"},
+		{"id": 2,"profeId":2,"username":"holamundo@profe.cl","pass":"hola1234","nombre": "Hola Mundo","asignatura": "Ingles"},
+		{"id": 3,"profeId":3,"username":"juanperez@profe.cl","pass":"juan1234","nombre": "Juan Perez","asignatura": "Base de datos"},
+		{"id": 4,"profeId":4,"username":"mariaperez@profe.cl","pass":"maria1234","nombre": "Maria Perez","asignatura": "Arquitectura SW"},
+		{"id": 5,"profeId":5,"username":"manolobarbas@profe.cl","pass":"manolo1234","nombre": "Manolo Barbas","asignatura": "Matematicas"}	
+	],
+
+	"alumnos":[
+		{"id": 1,"alumnoId":1,"username":"wanolo@alumno.cl","pass":"wanolo4321","nombre": "Wanolo Adidas"},
+		{"id": 2,"alumnoId":2,"username":"jeff@alumno.cl","pass":"jeff4321", "nombre": "Jeff Bezos"},	
+		{"id": 3,"alumnoId":3,"username":"baity@alumno.cl","pass":"baity4321","nombre": "Baity Bait"},	
+		{"id": 4,"alumnoId":4,"username":"juan@alumno.cl","pass":"juan4321","nombre": "Juan Petardetes"},	
+		{"id": 5,"alumnoId":5,"username":"rene@alumno.cl","pass":"rene4321","nombre": "Rene Vergaseca"}	
+	],
+
+	"horario":[
+		{"id":1,"alumnoId":1,"nombreAsignatura": "Base de datos","profeId":3,"nombreProfe":"Juan Perez","seccion":"BD001"},
+		{"id":2,"alumnoId":1,"nombreAsignatura": "Programacion","profeId":1,"nombreProfe":"Pato Yañez","seccion":"PRO001"},
+		{"id":3,"alumnoId":2,"nombreAsignatura": "Programacion","profeId":1,"nombreProfe":"Pato Yañez","seccion":"PRO002"},
+		{"id":4,"alumnoId":2,"nombreAsignatura": "Ingles","profeId":2,"nombreProfe":"Hola Mundo","seccion":"ING001"},
+		{"id":5,"alumnoId":3,"nombreAsignatura": "Ingles","profeId":2,"nombreProfe":"Hola Mundo","seccion":"ING002"},
+		{"id":6,"alumnoId":3,"nombreAsignatura": "Base de datos","profeId":3,"nombreProfe": "Juan Perez","seccion":"BD002"},
+		{"id":7,"alumnoId":4,"nombreAsignatura": "Matematicas","profeId":5,"nombreProfe": "Manolo Barbas","seccion":"MAT005"},
+		{"id":8,"alumnoId":4,"nombreAsignatura": "Arquitectura SW","profeId":4,"nombreProfe": "Maria Perez","seccion":"ARQ006"},
+		{"id":9,"alumnoId":5,"nombreAsignatura": "Base de datos","profeId":3,"nombreProfe": "Juan Perez","seccion":"BD003 "},
+		{"id":10,"alumnoId":5,"nombreAsignatura": "Programacion","profeId":1,"nombreProfe":"Pato Yañez","seccion":"PRO003"}
+	]
+}
