@@ -32,8 +32,7 @@ export class InicioAlumnosPage implements OnInit {
       //con esta wea hacemos que horario tenga los datos que pedimos desde la api anasheeeeeeeiiiiii
       this.api.getHorarioAlumno(this.id).subscribe((horarioData: any) => {
         this.horarios = horarioData;
-        console.log('hola_xD');
-        console.log('Datos de horario:', this.horarios);
+        
       });
     });
   }

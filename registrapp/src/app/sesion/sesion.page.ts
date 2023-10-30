@@ -35,6 +35,9 @@ alumnoEncontrado: any = [];
 
   async validar()
   {
+
+    this.nombre = this.nombre.toLowerCase();
+    //convierte el nombre en minusculas
    const numeroLetrasNombre = this.nombre.length;
     const numeroLetrasClave = this.clave.length;
     /* console.log(numeroLetrasNombre)
@@ -69,12 +72,9 @@ alumnoEncontrado: any = [];
         // nos manda a la pagina de profes
         if (this.nombre.endsWith('@profe.cl')) {
           this.apiDatos.getProfesores().subscribe(async(data: any  = [])=> 
-          {console.log('Respuesta del servicio getProfesor:', data); 
-          console.log('Nombre de usuario:', this.nombre);
-          console.log('Contraseña:', this.clave);
-          this.profesorEncontrado = data.find((profesores: any = []) => 
+          {this.profesorEncontrado = data.find((profesores: any = []) => 
           profesores.username === this.nombre && profesores.pass === this.clave);
-          console.log(this.profesorEncontrado);
+          
             
 
               if (this.profesorEncontrado)this.router.navigate(['inicio/' + this.profesorEncontrado.profeId]);
@@ -100,12 +100,9 @@ alumnoEncontrado: any = [];
           // nos manda a la pagina de alumnos
           else if (this.nombre.endsWith('@alumno.cl')) {
             this.apiDatos.getAlumnos().subscribe(async(data: any  = [])=> 
-            {console.log('Respuesta del servicio getAlumno:', data,); 
-            console.log('Nombre de usuario:', this.nombre);
-            console.log('Contraseña:', this.clave);
-            this.alumnoEncontrado = data.find((alumnos: any = []) => 
+            {this.alumnoEncontrado = data.find((alumnos: any = []) => 
             alumnos.username === this.nombre && alumnos.pass === this.clave);
-            console.log(this.alumnoEncontrado);
+            
             
                 if (this.alumnoEncontrado){
                   const id = this.alumnoEncontrado.alumnoId;
