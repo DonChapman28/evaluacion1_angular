@@ -14,6 +14,8 @@ import { IonicStorageModule } from '@ionic/storage-angular';
 //agregarlo a import en ngModule
 
 import { HttpClientModule } from '@angular/common/http';
+
+//qr
 @NgModule({
   declarations: [AppComponent],
   imports: [HttpClientModule,BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot()],

@@ -33,7 +33,12 @@ export class InicioAlumnosPage implements OnInit {
       this.api.getHorarioAlumno(this.id).subscribe((horarioData: any) => {
         this.horarios = horarioData;
         
+
+        
       });
+
+      this.servicioDatos.alumnoId = this.id;
+      console.log(this.servicioDatos.alumnoId);
     });
   }
 

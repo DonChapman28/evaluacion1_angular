@@ -8,6 +8,7 @@ import { LeerQrPageRoutingModule } from './leer-qr-routing.module';
 
 import { LeerQrPage } from './leer-qr.page';
 
+
 @NgModule({
   imports: [
     CommonModule,

@@ -5,10 +5,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ApiDatosService {
   private urlBaseAPI = 'http://localhost:3000';
-  listadoProfesor : any = [];
-  listadoAlumnos : any = [];
-  listadoAsignaturas : any = [];
-  listadoHorarios : any = [];
+  
+
 
   constructor(private http: HttpClient) { }
   getProfesores() {
@@ -35,5 +33,15 @@ export class ApiDatosService {
   getHorarioProfe(id: string) {
     const url = this.urlBaseAPI + '/horario?profeId=' + id; 
     return this.http.get(url);
+  }  
+
+  getHorarioConSeccion(seccion: string,id: string){
+    const url = this.urlBaseAPI + '/horario?seccion=' + seccion + '&alumnoId=' + id; 
+    return this.http.get(url);
+  }
+  
+  postAsistencia(data : any) {
+    const url = this.urlBaseAPI + '/asistencia'; 
+    return this.http.post<any>(url, data);
   }  
 }
