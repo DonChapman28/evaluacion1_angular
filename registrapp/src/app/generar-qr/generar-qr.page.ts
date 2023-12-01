@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiDatosService } from '../apiDatos/api-datos.service';
 import { ActivatedRoute } from '@angular/router';
-
+import { ServicioDatosService } from '../servicio-datos.service';
 
 @Component({
   selector: 'app-generar-qr',
@@ -10,18 +10,33 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class GenerarQrPage implements OnInit {
   texto : any;
-  constructor(
+  seccion : any;
+  asistenciaSeccion: any;
+  permitir : boolean = false;
+  permitirQr : boolean = false;
+  fechaAsist :any;
+  constructor(private servicioDatos: ServicioDatosService,
     private api:ApiDatosService,
-    private activated: ActivatedRoute,) { }
+    private activated: ActivatedRoute) { }
 
-  ngOnInit() {
-    this.activated.paramMap.subscribe(p => {
-      this.texto = p.get('qrId') ?? '';
-      
-      
-    });
-
-    
+    ngOnInit() {
+      this.activated.paramMap.subscribe(p => {
+        this.texto = p.get('qrId') ?? '';
+        this.seccion = p.get('qrId') ?? '';
+        this.api.getAsistenciaSeccion(this.seccion).subscribe((asistenciaData: any) => {
+        this.asistenciaSeccion = asistenciaData;
+        console.log(this.asistenciaSeccion);
+        })
+        });
+    }
+  
+    mostrarDatos()
+    {
+      this.permitir = !this.permitir;
+    }
+    mostrarQr()
+    {
+      this.permitirQr = !this.permitirQr;
+    }
+  
   }
-
-}

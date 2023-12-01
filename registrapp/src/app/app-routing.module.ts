@@ -32,7 +32,7 @@ const routes: Routes = [
     loadChildren: () => import('./generar-qr/generar-qr.module').then( m => m.GenerarQrPageModule)
   },
   {
-    path: 'leer-qr/:qrId',
+    path: 'leer-qr/:qrId/:asignatura',
     loadChildren: () => import('./leer-qr/leer-qr.module').then( m => m.LeerQrPageModule)
   },
 

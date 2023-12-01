@@ -28,6 +28,7 @@
     "@capacitor/status-bar": "5.0.6",
     "@ionic/angular": "^7.0.0",
     "@ionic/storage-angular": "^4.0.0",
+    "@zxing/library": "^0.20.0",
     "@zxing/ngx-scanner": "^16.1.0",
     "angularx-qrcode": "^16.0.2",
     "ionicons": "^7.0.0",

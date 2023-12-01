@@ -44,4 +44,14 @@ export class ApiDatosService {
     const url = this.urlBaseAPI + '/asistencia'; 
     return this.http.post<any>(url, data);
   }  
+
+  getAsistenciaAlumno(id:string,seccion:string){
+    const url = this.urlBaseAPI + '/asistencia?AlumnoId=' + id + '&seccion=' + seccion;
+    return this.http.get(url);
+  }
+  
+  getAsistenciaSeccion(seccion:string){
+    const url = this.urlBaseAPI + '/asistencia?seccion=' + seccion;
+    return this.http.get(url);
+  }  
 }

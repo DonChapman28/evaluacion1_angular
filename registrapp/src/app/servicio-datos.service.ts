@@ -9,6 +9,8 @@ export class ServicioDatosService {
   public seccion: string = '';
   public alumnoId: string = '';
   public codigoQr: string = '';
+  public asistenciaAlumno : any;
+  public asistenciaSeccion : any;
 
   constructor() { }
 }
