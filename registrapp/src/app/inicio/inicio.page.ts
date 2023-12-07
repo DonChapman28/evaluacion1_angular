@@ -15,7 +15,7 @@ export class InicioPage implements OnInit {
   id : string = '';
   profesores : any = [];
   texto: any;
-  constructor( private alertContorller:AlertController,
+  constructor( private alertController:AlertController,
     private router: Router,
     private servicioDatos: ServicioDatosService,
     private api:ApiDatosService,
@@ -41,7 +41,7 @@ export class InicioPage implements OnInit {
 
 async cerrarSesion()
 {
-  const alert = await this.alertContorller.create({
+  const alert = await this.alertController.create({
       
     header : '',
     subHeader : '',

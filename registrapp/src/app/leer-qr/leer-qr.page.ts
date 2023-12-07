@@ -3,7 +3,10 @@ import { ServicioDatosService } from '../servicio-datos.service';
 import { ApiDatosService } from '../apiDatos/api-datos.service';
 import { ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 import { BrowserQRCodeReader, Result, VideoInputDevice } from '@zxing/library';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -13,7 +16,7 @@ import { BrowserQRCodeReader, Result, VideoInputDevice } from '@zxing/library';
 })
 export class LeerQrPage implements OnInit {
 
-  
+  public alertButtons = ['Aceptar'];
 
   qrData : any;
   prueba : any;
@@ -23,6 +26,7 @@ export class LeerQrPage implements OnInit {
   permitir : boolean = false;
   asistencias : any;
   asignatura : any;
+  enviar : boolean = false;
   private codeReader: BrowserQRCodeReader;
   private selectedDevice: VideoInputDevice | null;
   private scanning: boolean = false;
@@ -31,8 +35,10 @@ export class LeerQrPage implements OnInit {
 
   constructor(private servicioDatos: ServicioDatosService,
     private api:ApiDatosService,
+    private router: Router,
     private activated: ActivatedRoute,
-    private alertController: AlertController) {this.codeReader = new BrowserQRCodeReader();
+    private alertController: AlertController,
+    private toastController: ToastController,) {this.codeReader = new BrowserQRCodeReader();
       this.selectedDevice = null;  }
 
     getId() {
@@ -46,7 +52,7 @@ export class LeerQrPage implements OnInit {
         this.id = this.servicioDatos.alumnoId;
         this.api.getHorarioConSeccion( this.seccion,this.id).subscribe((horarioData: any) => {
           this.horarios = horarioData;
-          console.log(this.horarios);
+          // console.log(this.horarios);
 
           // Obtener la fecha actual
 const fechaActual = new Date();
@@ -67,8 +73,8 @@ const minutos = ('0' + fechaActual.getMinutes()).slice(-2);
 // Formatear la hora como "hh:mm"
 const horaFormateada = `${('0' + hora).slice(-2)}:${('0' + minutos).slice(-2)}`;
 
-console.log('Fecha:' + fechaFormateada);
-console.log('Hora: ' + horaFormateada);
+/* console.log('Fecha:' + fechaFormateada);
+console.log('Hora: ' + horaFormateada); */
           this.prueba = {
             asignatura: this.asignatura,
             seccion: this.seccion,
@@ -77,14 +83,16 @@ console.log('Hora: ' + horaFormateada);
             fecha:fechaFormateada,
             hora:horaFormateada
           };
-          console.log(this.prueba);
+          /* console.log(this.prueba); */
         });
         this.api.getAsistenciaAlumno(this.id, this.seccion).subscribe((asistenciaData: any) => {
           this.asistencias = asistenciaData;
-          console.log(this.asistencias);
+          // console.log(this.asistencias);
           
         })
       });
+
+      
 
     }
 
@@ -101,18 +109,27 @@ console.log('Hora: ' + horaFormateada);
             const selectedDevice: VideoInputDevice = videoInputDevices[0];
     
             codeReader.decodeFromInputVideoDevice(selectedDevice.deviceId).then((result: Result) => {
-              console.log(result.getText());
+              /* console.log(result.getText()); */
               console.log('enviado');
               if(result.getText() === this.seccion){
               this.api.postAsistencia(this.prueba).subscribe(response => {
-                console.log(response);
-                // Manejar la respuesta aquí si es necesario
+
+                /* console.log(response); */
               });
+              this.enviar = !this.enviar;
+              if (this.enviar) {
+                this.mostrarAlerta();
+              }
+              
+              
             }
             else{
               console.log('seccion ioncorrecta');
+              if (!this.enviar) {
+                this.mostrarError();
+              }
             }
-              // Puedes asignar el resultado a this.prueba y llamar a this.scanner() como lo hiciste antes
+              
             });
             
             const video = document.getElementById('video') as HTMLVideoElement;
@@ -148,7 +165,24 @@ console.log('Hora: ' + horaFormateada);
     this.permitir = !this.permitir;
   }
 
+  async mostrarAlerta() {
+    const alert = await this.alertController.create({
+      header: 'Registro exitoso',
+      buttons: this.alertButtons
+    });
 
+    await alert.present();
+    this.router.navigate(['inicio-alumnos/' + this.servicioDatos.alumnoId ]);
+  }
   
+  async mostrarError() {
+    const alert = await this.alertController.create({
+      header: 'Seccion incorrecta',
+      buttons: this.alertButtons
+    });
+
+    await alert.present();
+    this.router.navigate(['inicio-alumnos/' + this.servicioDatos.alumnoId ]);
+  }
   
   }
