@@ -25,7 +25,7 @@ export class GenerarQrPage implements OnInit {
         this.seccion = p.get('qrId') ?? '';
         this.api.getAsistenciaSeccion(this.seccion).subscribe((asistenciaData: any) => {
         this.asistenciaSeccion = asistenciaData;
-        console.log(this.asistenciaSeccion);
+        // console.log(this.asistenciaSeccion);
         })
         });
     }

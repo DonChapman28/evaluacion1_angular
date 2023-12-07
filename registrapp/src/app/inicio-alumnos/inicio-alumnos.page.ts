@@ -38,7 +38,7 @@ export class InicioAlumnosPage implements OnInit {
       });
 
       this.servicioDatos.alumnoId = this.id;
-      console.log(this.servicioDatos.alumnoId);
+      // console.log(this.servicioDatos.alumnoId);
     });
   }
 
