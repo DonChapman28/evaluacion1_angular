@@ -178,7 +178,7 @@ console.log('Hora: ' + horaFormateada); */
     });
 
     await alert.present();
-    this.detenerCamara();
+ 
     this.router.navigate(['inicio-alumnos/' + this.servicioDatos.alumnoId ]);
   }
   
@@ -189,17 +189,10 @@ console.log('Hora: ' + horaFormateada); */
     });
 
     await alert.present();
-    this.detenerCamara();
-    this.router.navigate(['inicio-alumnos/' + this.servicioDatos.alumnoId ]);
+
+    
   }
 
-  detenerCamara() {
-    if (this.mediaStream) {
-      // Detener el stream de la cámara
-      this.mediaStream.getTracks().forEach(track => track.stop());
-      this.mediaStream = null; // Limpiar la referencia al stream
-    }
-  
-  }
+
 
 }
