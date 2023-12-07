@@ -11,19 +11,11 @@
   
   <h1 class="ion-text-center">Leer Qr</h1>
 
-  <video id="video"></video>
+  <video class="ion-text-center" id="video"></video>
   
   
   
 <ion-button (click)="iniciarCamara()">Iniciar Escaner</ion-button>
-
-<ion-text *ngIf="enviar && true; else noHayDatos"></ion-text>
-<ion-alert 
-header="Ejemplo de alerta"
-subHeader="Mensaje importante"
-message="Esta es una alerta de ejemplo."
-[buttons]="alertButtons"></ion-alert>
-
 
 <ion-button (click)="mostrarDatos()" >Ver asistencias
 

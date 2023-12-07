@@ -30,6 +30,7 @@ export class LeerQrPage implements OnInit {
   private codeReader: BrowserQRCodeReader;
   private selectedDevice: VideoInputDevice | null;
   private scanning: boolean = false;
+  private mediaStream: MediaStream | null = null;
 
   private continueScanning: boolean = true;
 
@@ -98,10 +99,13 @@ console.log('Hora: ' + horaFormateada); */
 
     async iniciarCamara() {
       try {
-        const constraints = { video: true };
-        const stream = await navigator.mediaDevices.getUserMedia(constraints);
+        const constraints = { video: { facingMode: 'environment' } };
+    const stream = await navigator.mediaDevices.getUserMedia(constraints);
+
     
         if (stream) {
+          // Almacenamos el stream en la propiedad mediaStream
+        this.mediaStream = stream;
           const codeReader = new BrowserQRCodeReader();
           const videoInputDevices: VideoInputDevice[] = await codeReader.getVideoInputDevices();
     
@@ -118,6 +122,7 @@ console.log('Hora: ' + horaFormateada); */
               });
               this.enviar = !this.enviar;
               if (this.enviar) {
+                
                 this.mostrarAlerta();
               }
               
@@ -126,6 +131,7 @@ console.log('Hora: ' + horaFormateada); */
             else{
               console.log('seccion ioncorrecta');
               if (!this.enviar) {
+                
                 this.mostrarError();
               }
             }
@@ -172,6 +178,7 @@ console.log('Hora: ' + horaFormateada); */
     });
 
     await alert.present();
+    this.detenerCamara();
     this.router.navigate(['inicio-alumnos/' + this.servicioDatos.alumnoId ]);
   }
   
@@ -182,7 +189,17 @@ console.log('Hora: ' + horaFormateada); */
     });
 
     await alert.present();
+    this.detenerCamara();
     this.router.navigate(['inicio-alumnos/' + this.servicioDatos.alumnoId ]);
   }
+
+  detenerCamara() {
+    if (this.mediaStream) {
+      // Detener el stream de la cámara
+      this.mediaStream.getTracks().forEach(track => track.stop());
+      this.mediaStream = null; // Limpiar la referencia al stream
+    }
   
   }
+
+}
