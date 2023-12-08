@@ -117,16 +117,13 @@ console.log('Hora: ' + horaFormateada); */
               console.log('enviado');
               if(result.getText() === this.seccion){
               this.api.postAsistencia(this.prueba).subscribe(response => {
-
-                /* console.log(response); */
-              });
-              this.enviar = !this.enviar;
+                this.enviar = !this.enviar;
               if (this.enviar) {
                 
                 this.mostrarAlerta();
               }
-              
-              
+                /* console.log(response); */
+              });
             }
             else{
               console.log('seccion ioncorrecta');
@@ -188,11 +185,6 @@ console.log('Hora: ' + horaFormateada); */
       buttons: this.alertButtons
     });
 
-    await alert.present();
-
-    
+    await alert.present(); 
   }
-
-
-
 }
