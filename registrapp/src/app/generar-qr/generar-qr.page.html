@@ -12,4 +12,32 @@
   <br>
   <br>
   <qrcode class="ion-text-center" [qrdata]="texto" [width]="300"></qrcode>
+
+  <br>
+  <br>
+  <br>
+  
+    <ion-button (click)="mostrarDatos()" >Ver asistencias
+
+  
+  </ion-button>
+  
+  <ion-text color="primary" *ngIf="permitir && true; else noHayDatos">
+  <h1 class="ion-text-center"></h1>
+  <ion-item *ngFor="let asistencia of asistenciaSeccion">
+    <ion-card style="width: 100%; display: block;">
+      <ion-card-header>
+        <ion-card-title>{{asistencia.asignatura}}</ion-card-title>
+        <ion-card-subtitle>{{asistencia.seccion}}</ion-card-subtitle>
+        <ion-card-subtitle>{{asistencia.nombreAlumno}}</ion-card-subtitle>
+        <ion-card-subtitle>{{asistencia.fecha}}</ion-card-subtitle>
+        <ion-card-subtitle>{{asistencia.hora}}</ion-card-subtitle>
+      </ion-card-header>
+  </ion-card>
+  </ion-item>
+  </ion-text>
+  <ng-template #noHayDatos>
+  <ion-text color="danger" class="ion-text-center">
+  </ion-text>
+  </ng-template>
 </ion-content>
