@@ -130,6 +130,7 @@ console.log('Hora: ' + horaFormateada); */
               if (!this.enviar) {
                 
                 this.mostrarError();
+                
               }
             }
               
@@ -186,5 +187,6 @@ console.log('Hora: ' + horaFormateada); */
     });
 
     await alert.present(); 
+    this.router.navigate(['inicio-alumnos/' + this.servicioDatos.alumnoId]);
   }
 }
